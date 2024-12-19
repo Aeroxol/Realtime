@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"Current Level : {_currentStageId}");
                 BtnMoveStage();
                 _currentStage++;
-                _currentStageId = assetManager.NextStageId;
+                //_currentStageId = assetManager.NextStageId;
             }
             txtScore.text = $"SCORE {_score.ToString("0")}";
             var _x = Input.GetAxis("Horizontal");
@@ -142,8 +142,9 @@ public class GameManager : MonoBehaviour
         // args[0] : timestamp, args[1] : score
     }
 
-    public void MoveStage()
+    public void MoveStage(int targetStageId)
     {
+        _currentStageId = targetStageId;
         ObjectManager.Instance.SpawnAsteroid(2, _currentStage);
     }
 }

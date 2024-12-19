@@ -9,7 +9,8 @@ const handlerMappings = {
     2: gameStart,
     3: gameEnd,
     11: moveStageHandler,
-    33: getItem,
+    22: getItem,
+    //33: sendMessage,
 };
 
 export default handlerMappings;

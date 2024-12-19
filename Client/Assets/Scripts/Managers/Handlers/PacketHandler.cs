@@ -18,7 +18,7 @@ public class PacketHandler
         {2, GameStartHandler},
         {3, GameEndHandler},
         {11, MoveStageHandler},
-        {22, MoveStageHandler},
+        {22, GetItemHandler},
         {33, MessageHandler}
 
     };
@@ -28,7 +28,8 @@ public class PacketHandler
         {2, new Action<Socket, string, object[]>(SendGameStartHandler) },
         {3, new Action<Socket, string, object[]>(SendGameEndHandler)},
         {11, new Action<Socket, string, object[]>(SendMoveStageHandler)},
-        {33, new Action<Socket, string, object[]>(SendMoveStageHandler)},
+        {22, new Action<Socket, string, object[]>(SendGetItemHandler)},
+        {33, new Action<Socket, string, object[]>(SendMessageHandler)},
     };
     }
 
@@ -37,6 +38,7 @@ public class PacketHandler
     {
         try
         {
+            Debug.Log(packetId);
             if (HandlerMappings.TryGetValue(packetId, out Action<string> handler))
             {
                 handler.Invoke(payload);
@@ -62,6 +64,7 @@ public class PacketHandler
     {
         try
         {
+            Debug.Log(payload);
             ErrorMessage e = JsonUtility.FromJson<ErrorMessage>(payload);
             Debug.Log($"status: {e.status} : message : {e.message}");
         }
@@ -85,26 +88,25 @@ public class PacketHandler
 
     public void GameStartHandler(string payload)
     {
-        Debug.Log("GameStartPacket");
         GameManager.Instance.GameStart();
     }
 
     public void GameEndHandler(string payload)
     {
-        Debug.Log("GameEndPacket");
         GameManager.Instance.EndGame();
     }
 
     public void MoveStageHandler(string payload)
     {
         Debug.Log("MoveStagePacket");
+        GameManager.Instance.MoveStage(int.Parse(payload));
     }
     
     public void GetItemHandler(string payload){
-        Debug.Log("GetItemPacket");
         GameManager.Instance.AddScore(GameManager.Instance.assetManager.CurrentItemScore);
     }
 
+    // payload: int
     public void MessageHandler(string payload){
         Debug.Log("MessagePacket");
         ChatManager.Instance.AddMessage(payload);

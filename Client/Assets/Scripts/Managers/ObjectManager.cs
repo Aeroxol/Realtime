@@ -65,7 +65,7 @@ public class ObjectManager : MonoBehaviour
 
     public void GetItem(){
         Destroy(currentItem.gameObject);
-        NetworkManager.Instance.SendPacket(33, GameManager.Instance.assetManager.CurrentItemScore);
+        NetworkManager.Instance.SendPacket(22, GameManager.Instance.assetManager.CurrentItemScore);
         SpawnItem();
     }
 

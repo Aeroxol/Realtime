@@ -106,7 +106,6 @@ public class NetworkManager : MonoBehaviour
 
     public void SendPacket(int packetId, params object[] args)
     {
-        Debug.Log($"Send Packet! : {args}");
         _packetHandler.SendHandler(packetId, _socketManager.Socket, userId, args);
     }
 }

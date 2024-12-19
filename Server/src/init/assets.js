@@ -34,7 +34,6 @@ export const loadGameAssets = async () => {
 };
 
 export const reqGameAssets = (uuid, payload) => {
-  console.log('assets');
   return { status: 'success', packetId: 1, payload: JSON.stringify(gameAssets) };
 }
 
