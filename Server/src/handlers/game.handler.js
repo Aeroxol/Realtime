@@ -47,7 +47,7 @@ export const gameEnd = (uuid, payload) => {
     }
 
     // DB에 저장
-    return { status: 'success', packetId: 3, message: 'game ended', score };
+    return { status: 'success', packetId: 3, message: 'game ended' };
 }
 
 export const getItem = (uuid, payload) => {

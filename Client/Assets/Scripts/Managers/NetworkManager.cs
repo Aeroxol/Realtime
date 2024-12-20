@@ -65,6 +65,7 @@ public class NetworkManager : MonoBehaviour
     {
         public string status;
         public int packetId;
+        public string message;
         public string payload;
     }
 
@@ -96,6 +97,7 @@ public class NetworkManager : MonoBehaviour
     {
         try
         {
+            // Debug.Log(payload.message);
             _packetHandler.ExecuteHandler(payload.packetId, payload.payload);
         }
         catch (Exception e)

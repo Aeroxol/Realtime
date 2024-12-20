@@ -34,7 +34,7 @@ export const loadGameAssets = async () => {
 };
 
 export const reqGameAssets = (uuid, payload) => {
-  return { status: 'success', packetId: 1, payload: JSON.stringify(gameAssets) };
+  return { status: 'success', packetId: 1, message: 'asset success', payload: JSON.stringify(gameAssets) };
 }
 
 // 전역 변수로 선언
