@@ -1,6 +1,8 @@
 import { getGameAssets } from '../init/assets.js';
 import { setStage, getStage, clearStage } from '../models/stage.model.js';
 
+var hiscore = 0;
+
 export const gameStart = (uuid, payload) => {
     const { stages } = getGameAssets();
 
@@ -46,8 +48,13 @@ export const gameEnd = (uuid, payload) => {
         return { status: 'fail', message: 'score verification failed' };
     }
 
-    // DB에 저장
-    return { status: 'success', packetId: 3, message: 'game ended' };
+    if (score > hiscore) {
+        hiscore = score;
+        return { status: 'success', packetId: 3, payload: 'HISCORE', message: 'game ended' };
+    } else {
+        // DB에 저장
+        return { status: 'success', packetId: 3, message: 'game ended' };
+    }
 }
 
 export const getItem = (uuid, payload) => {

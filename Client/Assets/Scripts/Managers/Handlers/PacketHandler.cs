@@ -93,6 +93,10 @@ public class PacketHandler
 
     public void GameEndHandler(string payload)
     {
+        Debug.Log(payload);
+        if(payload == "HISCORE"){
+            Debug.Log("Hiscore");
+        }
         GameManager.Instance.EndGame();
     }
 
